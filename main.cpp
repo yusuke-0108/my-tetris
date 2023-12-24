@@ -39,11 +39,22 @@ Tetris::Tetris()
 }
 
 void Tetris::run(){
+    auto start_time = std::chrono::steady_clock::now();
     int cnt = 0;
-    int count = 0;
+    determinate_MINO_Type(); //first MINO;
     get_MINO();
     int color_index = MINO_Type_num + 2;
     while(window.isOpen()){
+
+        //1秒ごとに自動で落下
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time);
+        if(duration.count() % 1000 >= 0 && duration.count() % 1000 <= 10){
+            std::cout << duration.count() << std::endl;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE;
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        }
+
         sf::Event event;
         get_MINO_Pos();
         if(isHit_bottom()) next_step(&color_index, &cnt);
@@ -52,9 +63,6 @@ void Tetris::run(){
                 switch(event.key.code){
                     case sf::Keyboard::J:
                         rotate_MINO(&cnt);
-                        break;
-                    case sf::Keyboard::N:
-                        next_step(&color_index, &cnt);
                         break;
                     case sf::Keyboard::Escape:
                         window.close();
@@ -115,7 +123,7 @@ void Tetris::DisplayGameOver(){
             for(int j = 0; j < COL; ++j){
                 if(Field[i][j] == 1){
                     sf::RectangleShape cell(sf::Vector2f(BLOCK_SIZE, BLOCK_SIZE));
-                    cell.setPosition(j * BLOCK_SIZE, i * BLOCK_SIZE);
+                    cell.setPosition(j * BLOCK_SIZE, i * BLOCK_SIZE + 3 * BLOCK_SIZE);
                     sf::Color Color = ColorList[FieldColor[i][j]];
                     if(i == ROW - 1 || j == 0 || j == COL - 1){
                         cell.setFillColor(Color);
@@ -129,13 +137,13 @@ void Tetris::DisplayGameOver(){
 
         scoreText.setCharacterSize(20);
         scoreText.setFillColor(sf::Color::Black);
-        scoreText.setPosition(WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 + 30);
+        scoreText.setPosition(WINDOW_WIDTH / 2 - 50 , WINDOW_HEIGHT / 2 + 30);
         scoreText.setString("Final Score:" + std::to_string(score));
         window.draw(scoreText);
 
         GameOverText.setFont(font);
         GameOverText.setFillColor(sf::Color::Black);
-        GameOverText.setPosition(WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2);
+        GameOverText.setPosition(WINDOW_WIDTH / 2 - 50 , WINDOW_HEIGHT / 2);
         GameOverText.setString("GameOver!");
         window.draw(GameOverText);
 
@@ -179,6 +187,16 @@ void Tetris::next_step(int* color_index, int* cnt){
     update_Field(*color_index);
     erase_MINO();
 
+    ++MINO_Type_num;
+    ++get_MINO_cnt;
+
+    if(MINO_Type_num > 6){
+        MINO_Type_num = 0;
+    }
+    if(get_MINO_cnt > 6){  //テトラミノが1順
+        determinate_MINO_Type();
+        get_MINO_cnt = 0;
+    }
     get_MINO();
     *color_index = MINO_Type_num + 2;
     get_MINO_Pos();

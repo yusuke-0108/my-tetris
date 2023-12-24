@@ -23,16 +23,16 @@ void Tetris::rotate_MINO(int* cnt){
             rotate_MINO_T(cnt);
             break;
         case 3:
-            rotate_MINO_J(cnt);
+            rotate_MINO_J(cnt);  //OK
             break;
         case 4:
-            rotate_MINO_L(cnt);
+            rotate_MINO_L(cnt);  //OK
             break;
         case 5:
-            rotate_MINO_S(cnt);
+            rotate_MINO_S(cnt);  //OK
             break;
         case 6:
-            rotate_MINO_Z(cnt);
+            rotate_MINO_Z(cnt);  //OK
             break;
     }
 }
@@ -40,19 +40,31 @@ void Tetris::rotate_MINO(int* cnt){
 void Tetris::rotate_MINO_T(int* cnt){
     switch(*cnt){
         case 0:
+            mino1.position.x += BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.x += BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE;
             ++(*cnt);
             break;
         case 1:
-            mino1.position.y += BLOCK_SIZE * 2;
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.x -= BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE;
             ++(*cnt);
             break;
         case 2:
-            mino1.position.x += BLOCK_SIZE * 2;
-            mino1.position.y -= BLOCK_SIZE * 2;
+            mino1.position.x += BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.x -= BLOCK_SIZE;
+            mino2.position.y -= BLOCK_SIZE;
             ++(*cnt);
             break;
         case 3:
-            mino1.position.x -= BLOCK_SIZE * 2;
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.x += BLOCK_SIZE;
+            mino2.position.y -= BLOCK_SIZE;
             *cnt = 0;
             break;
     }
@@ -61,23 +73,27 @@ void Tetris::rotate_MINO_T(int* cnt){
 void Tetris::rotate_MINO_J(int* cnt){
     switch(*cnt){
         case 0:
-            mino2.position.x += BLOCK_SIZE;
-            mino2.position.y += BLOCK_SIZE;
+            mino1.position.x += BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.x += BLOCK_SIZE * 2;
             ++(*cnt);
             break;
         case 1:
-            mino2.position.x += BLOCK_SIZE;
-            mino2.position.y += BLOCK_SIZE;
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE * 2;
             ++(*cnt);
             break;
         case 2:
-            mino2.position.x -= BLOCK_SIZE * 3;
-            mino2.position.y += BLOCK_SIZE;
+            mino1.position.x += BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.x -= BLOCK_SIZE * 2;
             ++(*cnt);
             break;
         case 3:
-            mino2.position.x += BLOCK_SIZE;
-            mino2.position.y -= BLOCK_SIZE * 3;
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.y -= BLOCK_SIZE * 2;
             *cnt = 0;
             break;
     }
@@ -101,34 +117,82 @@ void Tetris::rotate_MINO_I(int* cnt){
 void Tetris::rotate_MINO_L(int* cnt){
     switch(*cnt){
         case 0:
-            mino2.position.x -= BLOCK_SIZE;
-            mino2.position.y += BLOCK_SIZE * 3;
+            mino1.position.x += BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE * 2;
             ++(*cnt);
             break;
         case 1:
-            mino2.position.x -= BLOCK_SIZE;
-            mino2.position.y -= BLOCK_SIZE;
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.x -= BLOCK_SIZE *2;
             ++(*cnt);
             break;
         case 2:
-            mino2.position.x -= BLOCK_SIZE;
-            mino2.position.y -= BLOCK_SIZE;
+            mino1.position.x += BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.y -= BLOCK_SIZE * 2;
             ++(*cnt);
             break;
         case 3:
-            mino2.position.x += BLOCK_SIZE * 3;
-            mino2.position.y -= BLOCK_SIZE;
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.x += BLOCK_SIZE * 2;
             *cnt = 0;
             break;
     }
 }
 
 void Tetris::rotate_MINO_S(int* cnt){
+    switch(*cnt){
+        case 0:
+            mino1.position.x += BLOCK_SIZE * 2;
+            ++(*cnt);
+            break;
+        case 1:
+            mino1.position.x -= BLOCK_SIZE * 2;
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE;
+            ++(*cnt);
+            break;
+        case 2:
+            mino1.position.y -= BLOCK_SIZE * 2;
+            ++(*cnt);
+            break;
+        case 3:
+            mino1.position.y += BLOCK_SIZE;
+            mino2.position.y -= BLOCK_SIZE;
+            *cnt = 0;
+            break;
+    }
 
 }
 
 void Tetris::rotate_MINO_Z(int* cnt){
-
+    switch(*cnt){
+        case 0:
+            mino1.position.x += BLOCK_SIZE * 2;
+            ++(*cnt);
+            break;
+        case 1:
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y += BLOCK_SIZE * 2;
+            mino2.position.x -= BLOCK_SIZE;
+            ++(*cnt);
+            break;
+        case 2:
+            mino1.position.x -= BLOCK_SIZE;
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.x += BLOCK_SIZE;
+            mino2.position.y -= BLOCK_SIZE;
+            ++(*cnt);
+            break;
+        case 3:
+            mino1.position.y -= BLOCK_SIZE;
+            mino2.position.y += BLOCK_SIZE;
+            *cnt = 0;
+            break;
+    }
 }
 
 void Tetris::rotate_MINO_O(int* cnt){

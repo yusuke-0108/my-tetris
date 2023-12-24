@@ -20,6 +20,7 @@ private:
     int Field[ROW][COL];
     int FieldColor[ROW][COL];
     int MINO_Type_num;
+    int get_MINO_cnt = 0;
     int score = 0;
     MINOINFO mino1;
     MINOINFO mino2;

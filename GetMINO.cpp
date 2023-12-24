@@ -9,7 +9,6 @@ extern const int init_pos_x;
 extern const int init_pos_y;
 
 void Tetris::get_MINO(){
-    determinate_MINO_Type();
     switch(MINO_Type_num){
         case 0:
             create_MINO_I();
@@ -84,7 +83,7 @@ void Tetris::create_MINO_T(){
     mino1.position.y = init_pos_y + BLOCK_SIZE;
 
     mino2.position.x = mino1.position.x + BLOCK_SIZE;
-    mino2.position.y = mino1.position.y + BLOCK_SIZE;
+    mino2.position.y = mino1.position.y - BLOCK_SIZE;
 
     mino1.MINO.setPosition(mino1.position);
     mino2.MINO.setPosition(mino2.position);
@@ -156,7 +155,7 @@ void Tetris::create_MINO_Z(){
 
     //position
     mino1.position.x = init_pos_x;
-    mino1.position.y = init_pos_y + BLOCK_SIZE;
+    mino1.position.y = init_pos_y;
 
     mino2.position.x = mino1.position.x +  BLOCK_SIZE;
     mino2.position.y = mino1.position.y + BLOCK_SIZE;
