@@ -2,29 +2,15 @@
 #include "header.hpp"
 
 
-void Display::display(){
-    window.clear(sf::Color::White);
-
-    //ひとつ前の状態
-    for(int i = 0; i < ROW; ++i){
-        for(int j = 0; j < COL; ++j){
-            if(field[i][j] == 1){
-                sf::RectangleShape cell(sf::Vector2f(BLOCK_SIZE, BLOCK_SIZE));
-                cell.setPosition(j * BLOCK_SIZE, i * BLOCK_SIZE);
-                sf::Color Color = ColorList[field_color[i][j]];
-                if(i == ROW - 1 || j == 0 || j == COL - 1){
-                    cell.setFillColor(Color);
-                }else{
-                    cell.setFillColor(Color);
-                }
-                window.draw(cell);
-            }
-        }
-    }
+void Display::display(Tetrimino mino){
+    set_mino(mino);
+    draw_grid();
+    window.display();
 }
 
 void Display::draw_grid(){
     sf::Color grid_color = sf::Color::Black;
+
     for(int i = 0; i < WINDOW_WIDTH; i +=BLOCK_SIZE){
         sf::Vertex line[] = {
             sf::Vertex(sf::Vector2f(i, BLOCK_SIZE), grid_color),
@@ -40,4 +26,9 @@ void Display::draw_grid(){
         };
         window.draw(line, 4, sf::Lines);
     }
+}
+
+void Display::set_mino(Tetrimino mino){
+    window.draw(mino.mino1_.MINO);
+    window.draw(mino.mino2_.MINO);
 }

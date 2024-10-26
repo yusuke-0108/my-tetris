@@ -33,7 +33,11 @@ int main(){
 
     Display dp;
     Tetrimino tetrimino(1);
+    tetrimino.get_mino();
 
-
-    dp.display();
+    while(dp.window.isOpen()){
+        dp.window.clear(sf::Color::White);
+        
+        dp.display(tetrimino);
+    }
 }

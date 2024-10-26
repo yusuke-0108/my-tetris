@@ -22,7 +22,6 @@ class Tetrimino : public virtual Field{
         MINOINFO mino1_;
         MINOINFO mino2_;
 
-
         void get_mino();
         void create_mino_I();
         void create_mino_J();
