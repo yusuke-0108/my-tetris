@@ -1,20 +1,3 @@
-#include <SFML/Graphics.hpp>
-#include <vector>
-
-const int ROW = 22;
-const int COL = 12;
-const int WINDOW_WIDTH = 360;
-const int WINDOW_HEIGHT = 660;
-const int BLOCK_SIZE = 30;
-const int init_pos_x = (COL / 2 - 1)* BLOCK_SIZE;
-const int init_pos_y = BLOCK_SIZE;
-
-struct MINOINFO{
-    sf::RectangleShape MINO;
-    sf::Vector2f position;
-    int x, y;
-};
-
 class Tetris{
 private:
     int Field[ROW][COL];
@@ -66,5 +49,3 @@ public:
     void rotate_MINO_S(int* cnt);
     void rotate_MINO_Z(int* cnt);
 };
-
-void drawGrid(sf::RenderWindow& window);

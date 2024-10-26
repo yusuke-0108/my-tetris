@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  tetris_env:
+    build: .
+    volumes:
+      - .:/work
+    tty: true
