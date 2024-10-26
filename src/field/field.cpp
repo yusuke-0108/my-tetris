@@ -27,6 +27,7 @@ void Field::update(Tetrimino mino, int color_index){
     erase_mino();
 }
 
+// 横一列にミノが並んだら、その列を削除し、下方向にシフト
 void Field::erase_mino(){
     int count = 0;
     for(int i = ROW - 2; i > 0; --i){
@@ -36,7 +37,7 @@ void Field::erase_mino(){
         if(count == COL - 2){
             for(int k = i; k > 0; --k){
                 for(int j = 1; j < COL - 1; ++j){
-                    field[k][j] = field[k - 1][j]; //erase MINO
+                    field[k][j] = field[k - 1][j];
                     field_color[k][j] = field_color[k - 1][j];
                 }
             }
@@ -46,6 +47,7 @@ void Field::erase_mino(){
     }
 }
 
+// Fieldの初期化
 void init_field(){
     for(int i = 0; i < ROW; ++i){
         for(int j = 0; j < COL; ++j){

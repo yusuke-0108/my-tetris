@@ -21,6 +21,7 @@ int main(){
 
     int mino_type = 1;
     int color_index = mino_type + 2;
+    int rotate_cnt = 0;
 
     Tetrimino tetrimino(mino_type);
     tetrimino.get_mino();
@@ -32,9 +33,17 @@ int main(){
         while(dp.window.pollEvent(event)){
             if(event.type == sf::Event::KeyPressed){
                 switch(event.key.code){
+                    // 時計回りに回転
+                    case sf::Keyboard::R:
+                        tetrimino.rotate_mino(&rotate_cnt);
+                        break;
+                    
+                    // テトリスの終了
                     case sf::Keyboard::Escape:
                         dp.window.close();
                         break;
+                    
+                    // ミノの上下左右での移動
                     default:
                         tetrimino.move_mino(event);
                         break;
@@ -50,10 +59,13 @@ int main(){
             field.update(tetrimino, color_index);
 
             tetrimino.mino_type_++;
+            rotate_cnt = 0;
 
             if(tetrimino.mino_type_ >= 7) tetrimino.mino_type_ = 0;
 
             color_index = tetrimino.mino_type_ + 2;
+
+
             tetrimino.get_mino();
         }
 
