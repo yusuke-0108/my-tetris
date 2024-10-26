@@ -5,13 +5,15 @@
 #include "../common/header.hpp"
 #include "../common/params.hpp"
 
+class Tetrimino;
+
 class Field {
-    protected:
-        void update();
+    // protected:
+    //     void update(Tetrimino mino, int color_index);
     
     public:
         Field() {}
-
+        void update(Tetrimino mino, int color_index);
         static int field[ROW][COL];
         static int field_color[ROW][COL];
 };

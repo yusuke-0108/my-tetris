@@ -22,7 +22,7 @@ class Display :public virtual Field{
 
         void display(Tetrimino mino);
 
-        void set_mino(Tetrimino mino);
+        void draw_mino(Tetrimino mino);
         void gameover();
 };
 

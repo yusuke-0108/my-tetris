@@ -4,9 +4,10 @@
 
 #include "../common/header.hpp"
 #include "../common/params.hpp"
-#include "../field/header.hpp"
 
-class Tetrimino : public virtual Field{
+class Field;
+
+class Tetrimino{
     private:
         struct MINOINFO{
             sf::RectangleShape MINO;
@@ -32,6 +33,8 @@ class Tetrimino : public virtual Field{
         void create_mino_Z();
 
         void move_mino(sf::Event event);
+        void get_mino_pos();
+
         void rotate_mino(int* cnt);
         void rotate_mino_I(int* cnt);
         void rotate_mino_J(int* cnt);

@@ -3,7 +3,7 @@
 
 
 void Display::display(Tetrimino mino){
-    set_mino(mino);
+    draw_mino(mino);
     draw_grid();
     window.display();
 }
@@ -28,7 +28,7 @@ void Display::draw_grid(){
     }
 }
 
-void Display::set_mino(Tetrimino mino){
+void Display::draw_mino(Tetrimino mino){
     window.draw(mino.mino1_.MINO);
     window.draw(mino.mino2_.MINO);
 }

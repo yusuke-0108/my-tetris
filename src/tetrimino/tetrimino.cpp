@@ -1,5 +1,6 @@
 
 #include "header.hpp"
+#include "../hit/header.hpp"
 
 void Tetrimino::get_mino(){
     switch(mino_type_){
@@ -26,6 +27,38 @@ void Tetrimino::get_mino(){
             break;
     }
 }
+
+void Tetrimino::get_mino_pos(){
+    mino1_.x = mino1_.position.x / BLOCK_SIZE;
+    mino1_.y = mino1_.position.y / BLOCK_SIZE;
+
+    mino2_.x = mino2_.position.x / BLOCK_SIZE;
+    mino2_.y = mino2_.position.y / BLOCK_SIZE;
+}
+
+void Tetrimino::move_mino(sf::Event event){
+    switch(event.key.code){
+        case sf::Keyboard::Down:
+            if(!is_hit_bottom(this)){
+                mino1_.position.y += BLOCK_SIZE;
+                mino2_.position.y += BLOCK_SIZE;
+            }
+            break;
+        case sf::Keyboard::Left:
+            if(!is_hit_left(this)){
+                mino1_.position.x -= BLOCK_SIZE;
+                mino2_.position.x -= BLOCK_SIZE;
+            }
+            break;
+        case sf::Keyboard::Right:
+            if(!is_hit_right(this)){
+                mino1_.position.x += BLOCK_SIZE;
+                mino2_.position.x += BLOCK_SIZE;
+            }
+            break;
+    }
+}
+
 
 void Tetrimino::rotate_mino(int* cnt){
     sf::Vector2f org_size_mino1 = mino1_.MINO.getSize();

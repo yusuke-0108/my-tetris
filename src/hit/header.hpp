@@ -7,8 +7,8 @@
 #include "../field/header.hpp"
 #include "../tetrimino/header.hpp"
 
-bool is_hit_bottom(Tetrimino mino);
-bool is_hit_left(Tetrimino mino);
-bool is_hit_right(Tetrimino mino);
+bool is_hit_bottom(Tetrimino* mino);
+bool is_hit_left(Tetrimino* mino);
+bool is_hit_right(Tetrimino* mino);
 
 #endif
