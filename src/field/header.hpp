@@ -7,6 +7,7 @@
 
 class Tetrimino;
 
+// フィールドの状態を扱うクラス
 class Field {
     private:
         void erase_mino(int* score);

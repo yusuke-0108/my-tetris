@@ -3,6 +3,7 @@
 #include "tetrimino/header.hpp"
 #include "display/header.hpp"
 #include "hit/header.hpp"
+#include <random>
 
 extern const int BLOCK_SIZE;
 extern const int WINDOW_WIDTH;
@@ -26,15 +27,19 @@ int main(){
     init_field();
 
     Display dp;
-
-    int mino_type = 1;
+    std::random_device rnd;
+    std::mt19937 mt(rnd());     
+    std::uniform_int_distribution<> rand(0, 100000);  
+    
+    int mino_type = rand(mt) % 7;  
     int color_index = mino_type + 2;
     int rotate_cnt = 0;
     int score = 0;
 
+    // 最初のテトラミノを生成
     Tetrimino tetrimino(mino_type);
     tetrimino.get_mino();
-    std::cout << "get mino OK." << std::endl;
+
     while(dp.window.isOpen()){
         dp.window.clear(sf::Color::White);
 
@@ -60,25 +65,25 @@ int main(){
             }
         }
 
+        // ミノの表示位置を更新
         tetrimino.mino1_.MINO.setPosition(tetrimino.mino1_.position);
         tetrimino.mino2_.MINO.setPosition(tetrimino.mino2_.position);
         tetrimino.get_mino_pos();  // テトリミノの位置を取得(Field::field上での座標)
 
         if(is_hit_bottom(&tetrimino)){
             field.update(tetrimino, color_index, &score);
+
             if(gameover()){
                 std::cout << "game over" << std::endl;
                 dp.window.close();
-                // break;
             }
 
-            tetrimino.mino_type_++;
+            tetrimino.mino_type_ = rand(mt) % 7;
             rotate_cnt = 0;
 
             if(tetrimino.mino_type_ >= 7) tetrimino.mino_type_ = 0;
 
             color_index = tetrimino.mino_type_ + 2;
-
 
             tetrimino.get_mino();
         }
@@ -128,7 +133,7 @@ void display_game_end(int score){
         GameOverText.setFont(font);
         GameOverText.setFillColor(sf::Color::Black);
         GameOverText.setPosition(WINDOW_WIDTH / 2 - 50 , WINDOW_HEIGHT / 2);
-        GameOverText.setString("GameOver!");
+        GameOverText.setString("Game End!");
         dp.window.draw(GameOverText);
 
         dp.window.display();

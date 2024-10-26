@@ -7,6 +7,7 @@
 
 class Field;
 
+// テトラミノの生成や移動を行うクラス
 class Tetrimino{
     private:
         struct MINOINFO{

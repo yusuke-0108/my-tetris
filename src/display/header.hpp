@@ -7,6 +7,7 @@
 #include "../field/header.hpp"
 #include "../tetrimino/header.hpp"
 
+// フィールドの表示を行うクラス
 class Display :public virtual Field{
     private:
         sf::Font font;

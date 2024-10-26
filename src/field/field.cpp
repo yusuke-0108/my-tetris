@@ -47,6 +47,8 @@ void Field::erase_mino(int* score){
             }
             ++i;
             *score += 100;
+
+            std::cout << "score: " << *score << std::endl;
         }
         count = 0;
     }
