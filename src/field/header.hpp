@@ -10,6 +10,8 @@ class Tetrimino;
 class Field {
     // protected:
     //     void update(Tetrimino mino, int color_index);
+    private:
+        void erase_mino();
     
     public:
         Field() {}

@@ -49,6 +49,11 @@ int main(){
         if(is_hit_bottom(&tetrimino)){
             field.update(tetrimino, color_index);
 
+            tetrimino.mino_type_++;
+
+            if(tetrimino.mino_type_ >= 7) tetrimino.mino_type_ = 0;
+
+            color_index = tetrimino.mino_type_ + 2;
             tetrimino.get_mino();
         }
 

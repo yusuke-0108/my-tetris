@@ -14,15 +14,14 @@ class Tetrimino{
             sf::Vector2f position;
             int x, y;
         };
-
-        int mino_type_;
     
     public:
+        int mino_type_;
         explicit Tetrimino(int mino_type) : mino_type_(mino_type) {}
 
         MINOINFO mino1_;
         MINOINFO mino2_;
-
+        
         void get_mino();
         void create_mino_I();
         void create_mino_J();
