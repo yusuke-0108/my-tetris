@@ -24,3 +24,17 @@ void Field::update(Tetrimino mino, int color_index){
         field_color[mino.mino2_.y + i][mino.mino2_.x] = color_index;
     }
 }
+
+void init_field(){
+    for(int i = 0; i < ROW; ++i){
+        for(int j = 0; j < COL; ++j){
+            if((j == 0 || j == COL - 1 || i == ROW - 1) && (i != 0)){
+                Field::field[i][j] = 1;
+                Field::field_color[i][j] = 1;  //Black
+            }else{
+                Field::field[i][j] = 0;
+                Field::field_color[i][j] = 0; //White
+            }
+        }
+    }
+}

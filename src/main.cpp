@@ -12,20 +12,6 @@ extern const int COL;
 extern const int init_pos_x;
 extern const int init_pos_y;
 
-void init_field(){
-    for(int i = 0; i < ROW; ++i){
-        for(int j = 0; j < COL; ++j){
-            if((j == 0 || j == COL - 1 || i == ROW - 1) && (i != 0)){
-                Field::field[i][j] = 1;
-                Field::field_color[i][j] = 1;  //Black
-            }else{
-                Field::field[i][j] = 0;
-                Field::field_color[i][j] = 0; //White
-            }
-        }
-    }
-}
-
 int main(){
     Field field;
 
@@ -62,6 +48,8 @@ int main(){
 
         if(is_hit_bottom(&tetrimino)){
             field.update(tetrimino, color_index);
+
+            tetrimino.get_mino();
         }
 
         dp.display(tetrimino);
