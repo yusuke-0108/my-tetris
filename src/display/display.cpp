@@ -1,12 +1,17 @@
 
 #include "header.hpp"
 
-
 void Display::display(Tetrimino mino){
     draw_past_mino();
     draw_new_mino(mino);
     draw_grid();
     window.display();
+}
+
+void Display::display_end(){
+    draw_past_mino();
+    draw_grid();
+
 }
 
 void Display::draw_new_mino(Tetrimino mino){

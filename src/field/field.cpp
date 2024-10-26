@@ -5,7 +5,7 @@
 int Field::field[ROW][COL];
 int Field::field_color[ROW][COL];
 
-void Field::update(Tetrimino mino, int color_index){
+void Field::update(Tetrimino mino, int color_index, int* score){
     for(int i = 0; i < mino.mino1_.MINO.getSize().x / BLOCK_SIZE; ++i){
         field[mino.mino1_.y][mino.mino1_.x + i] = 1;
         field_color[mino.mino1_.y][mino.mino1_.x + i] = color_index;
@@ -24,16 +24,20 @@ void Field::update(Tetrimino mino, int color_index){
         field_color[mino.mino2_.y + i][mino.mino2_.x] = color_index;
     }
 
-    erase_mino();
+    erase_mino(score);
 }
 
 // 横一列にミノが並んだら、その列を削除し、下方向にシフト
-void Field::erase_mino(){
+void Field::erase_mino(int* score){
     int count = 0;
     for(int i = ROW - 2; i > 0; --i){
+
+        // 横にいくつのミノが並んでいるかを計算
         for(int j = 1; j < COL - 1; ++j){
             if(field[i][j] == 1) ++count;
         }
+
+        // 横にCOL - 2個並んでいれば、下方向にミノをシフト
         if(count == COL - 2){
             for(int k = i; k > 0; --k){
                 for(int j = 1; j < COL - 1; ++j){
@@ -42,6 +46,7 @@ void Field::erase_mino(){
                 }
             }
             ++i;
+            *score += 100;
         }
         count = 0;
     }

@@ -21,6 +21,7 @@ class Display :public virtual Field{
         sf::RenderWindow window;
 
         void display(Tetrimino mino);
+        void display_end();
 
         void draw_new_mino(Tetrimino mino);
         void draw_past_mino();
